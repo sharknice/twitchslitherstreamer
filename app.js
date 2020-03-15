@@ -77,7 +77,7 @@ var needle = require('needle');
     };
 
     sharkBot.speak = function (message, priority) {
-        needle.put('http://localhost:80801/twitchchat',
+        needle.put('http://localhost:8081/twitchchat',
             {message: message, priority: priority}, { json: true }, (err, res) => {
                 if (err) {
                     console.error(err);
