@@ -1,0 +1,17 @@
+{
+  "name": "twitchslitherstreamer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "needle": "^2.3.3",
+    "twitch": "^4.0.7",
+    "twitch-chat-client": "^4.0.7"
+  }
+}
