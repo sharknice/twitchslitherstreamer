@@ -64,7 +64,6 @@ var needle = require('needle');
     };
 
     sharkBot.respond = function (response, request) {
-        sharkBot.updateChat(request);
         if (response.confidence >= sharkBot.voiceConfidenceThreshold) {
             var voiceMssage = '';
             response.response.forEach(message => {
@@ -76,7 +75,12 @@ var needle = require('needle');
         response.response.forEach(message => {
             totalTypeTime += message.length * 80;
             setTimeout(function () {
-                chatClient.say(response.metadata.channel, message);              
+                chatClient.say(response.metadata.channel, message);
+                const responseRequest = request;
+                responseRequest.message = message;
+                responseRequest.user = sharkBot.un;
+                responseRequest.time = Date.now();
+                sharkBot.updateChat(responseRequest);
             }, totalTypeTime);
         });
     };
