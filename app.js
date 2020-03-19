@@ -93,7 +93,7 @@ var needle = require('needle');
     sharkBot.getRequest = function (channel, user, message) {
         var chat = { user: user, message: message, botName: sharkBot.un };
         var metadata = { channel: channel, confidenceThreshold: sharkBot.confidenceThreshold };
-        var chatRequest = { chat: chat, conversationName: "twitchtv-" + channel + "-" + sharkBot.launchTime, type: 'twitchtv', time: (new Date).getTime(), metadata: metadata };
+        var chatRequest = { chat: chat, conversationName: "twitchtv-" + channel + "-" + sharkBot.launchTime, type: 'twitchtv', time: Date.now(), metadata: metadata };
         return chatRequest;
     };
 
