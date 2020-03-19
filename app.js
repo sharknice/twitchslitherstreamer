@@ -29,7 +29,7 @@ var needle = require('needle');
                 }
                 else if (res && res.body) {
                     if (!optional || (optional && res.body.confidence >= sharkBot.confidenceThreshold)) {
-                        sharkBot.respond(res.body);
+                        sharkBot.respond(res.body, chatRequest);
                     }
                 } else {
                     console.log("no response");
@@ -50,6 +50,8 @@ var needle = require('needle');
                             totalTypeTime += message.length * 80;
                             setTimeout(function () {
                                 chatClient.whisper(res.body.metadata.whisper, message);
+                                const responseChatRequest = sharkBot.getRequest('private-message-' + res.body.metadata.whisper, res.body.metadata.whisper, message);
+                                sharkBot.updateChat(responseChatRequest);
                             }, totalTypeTime);
                         });
                     }
@@ -59,7 +61,8 @@ var needle = require('needle');
             });
     };
 
-    sharkBot.respond = function (response) {
+    sharkBot.respond = function (response, request) {
+        sharkBot.updateChat(request);
         if (response.confidence >= sharkBot.voiceConfidenceThreshold) {
             var voiceMssage = '';
             response.response.forEach(message => {
@@ -71,7 +74,7 @@ var needle = require('needle');
         response.response.forEach(message => {
             totalTypeTime += message.length * 80;
             setTimeout(function () {
-                chatClient.say(response.metadata.channel, message);
+                chatClient.say(response.metadata.channel, message);              
             }, totalTypeTime);
         });
     };
