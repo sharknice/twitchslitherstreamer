@@ -5,7 +5,7 @@ var needle = require('needle');
 
 (async () => {
     var sharkBot = this;
-    sharkBot.launchTime = (new Date).getTime();
+    sharkBot.launchTime = Date.now();
     sharkBot.un = 'sharkboteliteownage';
     sharkBot.confidenceThreshold = 0.89;
     sharkBot.voiceConfidenceThreshold = 0.89;
@@ -17,6 +17,8 @@ var needle = require('needle');
             chatRequest, { json: true }, (err, res) => {
                 if (err) {
                     console.error(err);
+                } else if (res) {
+                    console.log(res);
                 }
             });
     };
