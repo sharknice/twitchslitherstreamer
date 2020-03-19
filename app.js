@@ -77,8 +77,8 @@ var needle = require('needle');
             setTimeout(function () {
                 chatClient.say(response.metadata.channel, message);
                 const responseRequest = request;
-                responseRequest.message = message;
-                responseRequest.user = sharkBot.un;
+                responseRequest.chat.message = message;
+                responseRequest.chat.user = sharkBot.un;
                 responseRequest.time = Date.now();
                 sharkBot.updateChat(responseRequest);
             }, totalTypeTime);
